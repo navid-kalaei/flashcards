@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, StatusBar} from 'react-native'
+import {View, StatusBar} from 'react-native'
 import {Constants} from 'expo'
 import {purple} from './utils/colors'
 
