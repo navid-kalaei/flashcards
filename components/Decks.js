@@ -7,7 +7,7 @@ export default class Decks extends Component {
 
     renderItem = ({item}) => (
         <Card title={item.title}>
-            <Text style={{textAlign:'center'}}>{item.count}</Text>
+            <Text style={{textAlign:'center'}}>{item.count} Cards</Text>
         </Card>
     )
 
