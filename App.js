@@ -1,7 +1,51 @@
 import React from 'react'
-import {View, StatusBar} from 'react-native'
+import {View, StatusBar, Platform} from 'react-native'
+import {TabNavigator} from 'react-navigation'
 import {Constants} from 'expo'
-import {purple} from './utils/colors'
+import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import {purple, white} from './utils/colors'
+import Decks from './components/Decks'
+import AddDeck from './components/AddDeck'
+
+
+const Tabs = TabNavigator(
+    {
+        Decks: {
+            screen: Decks,
+            navigationOptions: {
+                tabBarLabel: 'Decks',
+                tabBarIcon: ({tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor}/>
+            }
+        },
+        AddDeck: {
+            screen: AddDeck,
+            navigationOptions: {
+                tabBarLabel: 'New Deck',
+                tabBarIcon: ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
+            }
+        }
+    },
+    {
+        navigationOptions: {
+            header: null
+        },
+        tabBarOptions: {
+            activeTintColor: Platform.OS === 'ios' ? purple : white,
+            style: {
+                height: 56,
+                backgroundColor: Platform.OS === 'ios' ? white : purple,
+                shadowRadius: 6,
+                shadowOpacity: 1,
+                shadowColor: 'rgba(0,0,0,0.24)',
+                shadowOffset: {
+                    width: 0,
+                    height: 3
+
+                }
+            }
+        }
+    }
+)
 
 
 const AppStatusBar = ({backgroundColor, ...props}) => (
@@ -16,6 +60,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
+        <Tabs/>
       </View>
     );
   }
