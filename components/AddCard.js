@@ -29,14 +29,16 @@ class AddCard extends Component {
         }
         else {
             console.log('in else')
+
             this.resetState()
-            // add card to DB
-            // increment the count
-            api.addCard({
+
+            const newCard = {
                 deck,
                 question,
                 answer
-            })
+            }
+
+            api.addCard(newCard)
             // navigate to back
         }
     }
