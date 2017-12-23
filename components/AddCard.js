@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View} from 'react-native'
 import {FormInput, FormLabel, FormValidationMessage, Button} from 'react-native-elements'
 import {connect} from 'react-redux'
 import * as api from '../utils/api'
+import {incrementDeckCount} from '../actions/decks'
 
 
 class AddCard extends Component {
@@ -38,7 +39,7 @@ class AddCard extends Component {
                 answer
             }
 
-            api.addCard(newCard)
+            api.addCard(newCard).then(this.props.dispatch(incrementDeckCount(deck)))
             // navigate to back
         }
     }
@@ -71,4 +72,6 @@ class AddCard extends Component {
     }
 }
 
-export default AddCard
+
+// just to use dispatch
+export default connect(null)(AddCard)
