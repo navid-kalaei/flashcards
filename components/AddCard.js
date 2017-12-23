@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {View} from 'react-native'
-import {FormInput, FormLabel, FormValidationMessage, Button} from 'react-native-elements'
 import {connect} from 'react-redux'
+import {FormInput, FormLabel, FormValidationMessage, Button} from 'react-native-elements'
 import * as api from '../utils/api'
 import {incrementDeckCount} from '../actions/decks'
 
@@ -40,7 +40,8 @@ class AddCard extends Component {
             }
 
             api.addCard(newCard).then(this.props.dispatch(incrementDeckCount(deck)))
-            // navigate to back
+
+            this.props.navigation.goBack()
         }
     }
 
