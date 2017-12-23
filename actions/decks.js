@@ -1,4 +1,4 @@
-import {ADD_CARD, ADD_DECK, FETCH_DECKS} from './constants'
+import {ADD_DECK, FETCH_DECKS, INCREMENT_DECK_COUNT} from './constants'
 
 export const addDeck = (title) => {
     return {
@@ -12,10 +12,7 @@ export const fetchDecks = (decks) => ({
     decks
 })
 
-export const addCard = ({deck, question, answer}) => ({
-    type: ADD_CARD,
-    card: {
-        question,
-        answer
-    }
+export const incrementDeckCount = (deck) => ({
+    type: INCREMENT_DECK_COUNT,
+    deck
 })
