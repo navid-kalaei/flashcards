@@ -1,4 +1,4 @@
-import {ADD_DECK, FETCH_DECKS} from '../actions/constants'
+import {ADD_DECK, FETCH_DECKS, INCREMENT_DECK_COUNT} from '../actions/constants'
 
 
 export default decks = (decks={}, action) => {
@@ -10,6 +10,11 @@ export default decks = (decks={}, action) => {
             }
         case FETCH_DECKS:
             return action.decks
+        case INCREMENT_DECK_COUNT:
+            return {
+                ...decks,
+                [decks[action.deck]]: decks[action.deck] + 1
+            }
         default:
             return decks
     }
