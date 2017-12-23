@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, FlatList} from 'react-native'
+import {View, Text, FlatList, TouchableOpacity} from 'react-native'
 import {Card} from 'react-native-elements'
 import {connect} from 'react-redux'
 import {fetchDecks} from '../actions/decks'
@@ -18,9 +18,17 @@ class Decks extends Component {
     }
 
     renderItem = ({item}) => (
-        <Card title={item.title}>
-            <Text style={{textAlign: 'center'}}>{item.count} Cards</Text>
-        </Card>
+        <TouchableOpacity onPress={() => (this.props.navigation.navigate(
+            'Deck',
+            {
+                title: item.title,
+                count: item.count
+            }
+        ))}>
+            <Card title={item.title}>
+                <Text style={{textAlign: 'center'}}>{item.count} Cards</Text>
+            </Card>
+        </TouchableOpacity>
     )
 
     render() {
