@@ -1,6 +1,8 @@
 import React from 'react'
 import {View, StatusBar, Platform} from 'react-native'
 import {TabNavigator} from 'react-navigation'
+import {Provider} from 'react-redux'
+import store from './config/store'
 import {Constants} from 'expo'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import {purple, white} from './utils/colors'
@@ -56,12 +58,14 @@ const AppStatusBar = ({backgroundColor, ...props}) => (
 
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
-        <Tabs/>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <View style={{flex: 1}}>
+                    <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
+                    <Tabs/>
+                </View>
+            </Provider>
+        )
+    }
 }
