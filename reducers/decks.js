@@ -1,15 +1,16 @@
-import {ADD_DECK} from '../actions/constants'
+import {ADD_DECK, FETCH_DECKS} from '../actions/constants'
 
 
-export default decks = (state={}, action) => {
+export default decks = (decks={}, action) => {
     switch (action.type) {
         case ADD_DECK:
             return {
-                ...state,
+                ...decks,
                 [action.title]: 0
             }
-
+        case FETCH_DECKS:
+            return action.decks
         default:
-            return state
+            return decks
     }
 }
