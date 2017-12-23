@@ -1,114 +1,46 @@
 import React, {Component} from 'react'
-import {Text, FlatList} from 'react-native'
+import {View, Text, FlatList} from 'react-native'
 import {Card} from 'react-native-elements'
+import {connect} from 'react-redux'
+import {fetchDecks} from '../actions/decks'
+import * as api from '../utils/api'
+import {decksToArray} from '../utils/helpers'
 
+class Decks extends Component {
 
-export default class Decks extends Component {
+    componentDidMount() {
+        const {dispatch} = this.props
+        api.fetchDecks().then(decks => {
+            decks = decks || {}
+            dispatch(fetchDecks(decks))
+        })
+    }
 
     renderItem = ({item}) => (
         <Card title={item.title}>
-            <Text style={{textAlign:'center'}}>{item.count} Cards</Text>
+            <Text style={{textAlign: 'center'}}>{item.count} Cards</Text>
         </Card>
     )
 
     render() {
-        return(
-            <FlatList
-                data={decks}
-                renderItem={this.renderItem}
-                keyExtractor={(item, index) => index}
-            />
+        const decks = this.props.decks || {}
+        const arrayDecks = decksToArray(decks)
+        return (
+            <View style={{flex: 1}}>
+                <FlatList
+                    data={arrayDecks}
+                    renderItem={this.renderItem}
+                    keyExtractor={(item, index) => index}
+                />
+            </View>
         )
     }
 }
 
-const decks = [
-    {
-        title: 'Deck 1',
-        count: 20
-    },
-    {
-        title: 'Deck 2',
-        count: 35
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 3',
-        count: 45
-    },
-    {
-        title: 'Deck 15',
-        count: 45
-    }
-]
+
+const mapStateToProps = (state) => ({
+    decks: state.decks
+})
+
+
+export default connect(mapStateToProps)(Decks)
