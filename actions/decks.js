@@ -1,9 +1,13 @@
-import {ADD_DECK} from './constants'
-import * as api from '../utils/api'
+import {ADD_DECK, FETCH_DECKS} from './constants'
 
-export const addDeck = (title) => (
-    api.addDeck(title).then({
+export const addDeck = (title) => {
+    return {
         type: ADD_DECK,
         title
-    })
-)
+    }
+}
+
+export const fetchDecks = (decks) => ({
+    type: FETCH_DECKS,
+    decks
+})
