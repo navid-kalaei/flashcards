@@ -13,11 +13,11 @@ class AddCard extends Component {
         answer: ''
     }
 
-    resetState = () => ({
+    resetState = () => (this.setState({
         formError: false,
         question: '',
         answer: ''
-    })
+    }))
 
     handleChange = (field) => (input) => (this.setState(() => ({[field]: input})))
 
