@@ -40,7 +40,7 @@ class AddDeck extends Component {
         const {dispatch} = this.props
         const {title} = this.state
 
-        if (this.validateForm(title)){
+        if (this.validateForm(title)) {
             api.addDeck(title).then(() => dispatch(addDeck(title)))
             this.setState(() => ({title: ''}))
             this.toHome()
@@ -51,22 +51,25 @@ class AddDeck extends Component {
     render() {
         const {title, formError} = this.state
 
-        return(
+        return (
             <View style={{flex: 1}}>
-                <FormLabel labelStyle={{fontSize: 17}}>What is the title of your new deck?</FormLabel>
-                <FormInput value={title} onChangeText={this.handleChange} maxLength = {25}/>
+                <View style={{flex: 1}}>
+                    <FormLabel labelStyle={{fontSize: 17}}>What is the title of your new deck?</FormLabel>
+                    <FormInput value={title} onChangeText={this.handleChange} maxLength={25}/>
 
-                {formError === NO_INPUT &&
-                <FormValidationMessage style={{textAlign: 'center'}}>
-                    Title Cannot Be Empty
-                </FormValidationMessage>}
+                    {formError === NO_INPUT &&
+                    <FormValidationMessage style={{textAlign: 'center'}}>
+                        Title Cannot Be Empty
+                    </FormValidationMessage>}
 
-                {formError === DUPLICATED_INPUT &&
-                <FormValidationMessage style={{textAlign: 'center'}}>
-                    Title already exists.
-                </FormValidationMessage>}
-
-                <Button onPress={this.onSubmit} large title="Add Deck"/>
+                    {formError === DUPLICATED_INPUT &&
+                    <FormValidationMessage style={{textAlign: 'center'}}>
+                        Title already exists.
+                    </FormValidationMessage>}
+                </View>
+                <View style={{marginBottom: 24}}>
+                    <Button onPress={this.onSubmit} large title="Add Deck"/>
+                </View>
             </View>
         )
     }
