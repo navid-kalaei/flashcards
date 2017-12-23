@@ -21,7 +21,7 @@ class AddDeck extends Component {
         if (!title) {
             error = NO_INPUT
         }
-        else if (this.props.decks.hasOwnProperty()) {
+        else if (this.props.decks.hasOwnProperty(title)) {
             error = DUPLICATED_INPUT
         }
 
