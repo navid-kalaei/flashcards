@@ -22,3 +22,26 @@ export const fetchDecks = () => (
 export const fetchDeck = (title) => (
     AsyncStorage.getItem(`${FLASHCARDS_KEY}:${title}`)
 )
+
+export const addCard = ({deck, question, answer}) => (
+    fetchDeck(deck)
+        .then(JSON.parse)
+        .then(values => {
+            values.push({
+                question,
+                answer
+            })
+
+            console.log('in fetchDeck, values: ', values)
+
+            return AsyncStorage.setItem(`${FLASHCARDS_KEY}:${deck}`, JSON.stringify(values))
+        })
+        .then(
+            fetchDecks
+        )
+        .then(decks => {
+            decks[deck]++
+            console.log('in fetchDecks, decks: ', decks)
+            return AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(decks))
+        })
+)
