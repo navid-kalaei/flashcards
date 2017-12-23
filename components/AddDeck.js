@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {View} from 'react-native'
 import {FormInput, FormLabel, FormValidationMessage, Button} from 'react-native-elements'
 import {connect} from 'react-redux'
-import {NavigationActions} from 'react-navigation'
 import {addDeck} from '../actions/decks'
 import * as api from '../utils/api'
 import {NO_INPUT, DUPLICATED_INPUT} from '../utils/constants'
@@ -15,9 +14,7 @@ class AddDeck extends Component {
     }
 
     toHome = () => {
-        this.props.navigation.dispatch(NavigationActions.back({
-            key: 'AddDeck'
-        }))
+        this.props.navigation.goBack('AddDeck')
     }
 
     handleChange = (title) => (this.setState(() => ({title})))
