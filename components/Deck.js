@@ -18,7 +18,7 @@ class Deck extends Component {
 
         this.props.navigation.navigate(
             'AddCard',
-            {deckTitle: title}
+            {deck: title}
         )
     }
 
