@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, StatusBar, Platform} from 'react-native'
-import {TabNavigator} from 'react-navigation'
+import {TabNavigator, StackNavigator} from 'react-navigation'
 import {Provider} from 'react-redux'
 import store from './config/store'
 import {Constants} from 'expo'
@@ -8,6 +8,7 @@ import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import {purple, white} from './utils/colors'
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
+import Deck from './components/Deck'
 
 
 const Tabs = TabNavigator(
@@ -49,6 +50,20 @@ const Tabs = TabNavigator(
     }
 )
 
+const MainNavigator = StackNavigator({
+    Home: {
+        screen: Tabs
+    },
+    Deck: {
+        screen: Deck,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple
+            }
+        }
+    }
+})
 
 const AppStatusBar = ({backgroundColor, ...props}) => (
     <View style={{backgroundColor, height: Constants.statusBarHeight}}>
@@ -63,7 +78,7 @@ export default class App extends React.Component {
             <Provider store={store}>
                 <View style={{flex: 1}}>
                     <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
-                    <Tabs/>
+                    <MainNavigator/>
                 </View>
             </Provider>
         )
