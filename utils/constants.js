@@ -1,0 +1,2 @@
+export const NO_INPUT = 'NO_INPUT'
+export const DUPLICATED_INPUT = 'DUPLICATED_INPUT'
