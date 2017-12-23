@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
-import {View,StyleSheet} from 'react-native'
+import {View, StyleSheet} from 'react-native'
+import {connect} from 'react-redux'
 import {Text, Button} from 'react-native-elements'
 import {blue, red} from '../utils/colors'
+
 
 class Deck extends Component {
 
@@ -23,7 +25,7 @@ class Deck extends Component {
     }
 
     render() {
-        const {title, count} = this.props.navigation.state.params
+        const {title, count} = this.props
         return (
             <View style={{flex: 1}}>
                 <View style={styles.content}>
@@ -68,4 +70,13 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Deck
+
+const mapStateToProps = (state, {navigation}) => {
+    const {title, count} = navigation.state.params
+    return {
+        count: state.decks[title] || count,
+        title
+    }
+}
+
+export default connect(mapStateToProps)(Deck)
