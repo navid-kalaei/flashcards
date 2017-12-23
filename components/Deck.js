@@ -14,11 +14,12 @@ class Deck extends Component {
     }
 
     render() {
+        const {title, count} = this.props.navigation.state.params
         return (
             <View style={{flex: 1}}>
                 <View style={styles.content}>
-                    <Text h1 style={styles.text}>Hello</Text>
-                    <Text h4 style={styles.text}>world!</Text>
+                    <Text h1 style={styles.text}>{title}</Text>
+                    <Text h4 style={styles.text}>{count} cards</Text>
                 </View>
                 <View style={styles.buttonSection}>
                     <Button large title='Add Card' backgroundColor={blue} buttonStyle={styles.button}/>
