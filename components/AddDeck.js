@@ -35,18 +35,19 @@ class AddDeck extends Component {
 
         if (this.validateForm(title)){
             api.addDeck(title).then(() => dispatch(addDeck(title)))
+            this.setState(() => ({title: ''}))
             // navigate to home
         }
 
     }
 
     render() {
-        const {formError} = this.state
+        const {title, formError} = this.state
 
         return(
             <View style={{flex: 1}}>
                 <FormLabel labelStyle={{fontSize: 17}}>What is the title of your new deck?</FormLabel>
-                <FormInput onChangeText={this.handleChange} maxLength = {25}/>
+                <FormInput value={title} onChangeText={this.handleChange} maxLength = {25}/>
 
                 {formError === NO_INPUT &&
                 <FormValidationMessage style={{textAlign: 'center'}}>
