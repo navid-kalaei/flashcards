@@ -23,13 +23,20 @@ class AddCard extends Component {
 
     onSubmit = () => {
         const {question, answer} = this.state
+        const {deck} = this.props.navigation.state.params
         if (!question || !answer) {
             this.setState(() => ({formError: true}))
         }
         else {
+            console.log('in else')
             this.resetState()
             // add card to DB
             // increment the count
+            api.addCard({
+                deck,
+                question,
+                answer
+            })
             // navigate to back
         }
     }
