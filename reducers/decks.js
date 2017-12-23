@@ -13,7 +13,7 @@ export default decks = (decks={}, action) => {
         case INCREMENT_DECK_COUNT:
             return {
                 ...decks,
-                [decks[action.deck]]: decks[action.deck] + 1
+                [action.deck]: decks[action.deck] + 1
             }
         default:
             return decks
