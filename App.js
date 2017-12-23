@@ -9,6 +9,7 @@ import {purple, white} from './utils/colors'
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
+import AddCard from './components/AddCard'
 
 
 const Tabs = TabNavigator(
@@ -57,6 +58,16 @@ const MainNavigator = StackNavigator({
     Deck: {
         screen: Deck,
         navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple
+            }
+        }
+    },
+    AddCard: {
+        screen: AddCard,
+        navigationOptions: {
+            title: 'Add Card',
             headerTintColor: white,
             headerStyle: {
                 backgroundColor: purple

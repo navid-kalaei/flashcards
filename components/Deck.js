@@ -13,6 +13,15 @@ class Deck extends Component {
         }
     }
 
+    onAddCard = () => {
+        const {title} = this.props.navigation.state.params
+
+        this.props.navigation.navigate(
+            'AddCard',
+            {deckTitle: title}
+        )
+    }
+
     render() {
         const {title, count} = this.props.navigation.state.params
         return (
@@ -22,8 +31,19 @@ class Deck extends Component {
                     <Text h4 style={styles.text}>{count} cards</Text>
                 </View>
                 <View style={styles.buttonSection}>
-                    <Button large title='Add Card' backgroundColor={blue} buttonStyle={styles.button}/>
-                    <Button large title='Start Quiz' backgroundColor={red} buttonStyle={styles.button}/>
+                    <Button
+                        onPress={this.onAddCard}
+                        large
+                        title='Add Card'
+                        backgroundColor={blue}
+                        buttonStyle={styles.button}
+                    />
+                    <Button
+                        large
+                        title='Start Quiz'
+                        backgroundColor={red}
+                        buttonStyle={styles.button}
+                    />
                 </View>
             </View>
         )
