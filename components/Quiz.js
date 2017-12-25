@@ -89,9 +89,9 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 8,
-        marginLeft: 8,
-        marginRight: 8
+        paddingTop: 8,
+        paddingLeft: 8,
+        paddingRight: 8
     },
     content: {
         flex: 1,
