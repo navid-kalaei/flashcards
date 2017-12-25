@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {View, StyleSheet, TouchableOpacity} from 'react-native'
+import {NavigationActions} from 'react-navigation'
 import {Text, Button} from 'react-native-elements'
 import * as api from '../utils/api'
 import {green, lightPurp, orange, red} from '../utils/colors'
@@ -44,6 +45,15 @@ class Quiz extends Component {
 
     onRetake = () => (this.setState(() => ({index: 0, correctCounter: 0, showQuestion: true})))
 
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'Home'})
+            ]
+        }))
+    }
+
     render() {
 
         const {count} = this.props.navigation.state.params
@@ -58,6 +68,7 @@ class Quiz extends Component {
                     </View>
                     <View style={styles.buttonSection}>
                         <Button
+                            onPress={this.toHome}
                             large
                             title='Decks'
                             backgroundColor={lightPurp}
