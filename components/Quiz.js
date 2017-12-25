@@ -9,7 +9,8 @@ class Quiz extends Component {
 
     state = {
         index: 0,
-        deck: []
+        deck: [],
+        showQuestion: true
     }
 
     static navigationOptions = ({navigation}) => {
@@ -26,18 +27,27 @@ class Quiz extends Component {
         api.fetchDeck(title).then(deck => (this.setState(() => ({deck}))))
     }
 
+    togglePage = () => (this.setState(() => {
+        const {showQuestion} = this.state
+        this.setState(() => ({showQuestion: !showQuestion}))
+    }))
+
     render() {
 
         const {count} = this.props.navigation.state.params
-        const {deck, index} = this.state
+        const {index, showQuestion} = this.state
+        const isDeckFetched = this.state.deck.length
+
+        const question = isDeckFetched ? this.state.deck[index].question : ''
+        const answer = isDeckFetched ? this.state.deck[index].answer : ''
 
         return (
             <View style={styles.container}>
                 <Text h4>{index+1}/{count}</Text>
                 <View style={styles.content}>
-                    {deck.length
+                    {isDeckFetched
                     ? <View style={styles.container}>
-                        <Text h2 style={styles.text}>{deck[index].question}</Text>
+                        <Text h2 style={styles.text}>{showQuestion ? question : answer}</Text>
                         <TouchableOpacity>
                             <Text style={{color: red}}>Answer</Text>
                         </TouchableOpacity>
