@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {View, StatusBar, Platform} from 'react-native'
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import {Provider} from 'react-redux'
 import store from './config/store'
-import {Constants} from 'expo'
+import {Constants, Permissions} from 'expo'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import {purple, white} from './utils/colors'
 import Decks from './components/Decks'
@@ -11,6 +11,7 @@ import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import {GRANTED, UNDETERMINED} from './utils/constants'
 
 
 const Tabs = TabNavigator(
@@ -95,7 +96,24 @@ const AppStatusBar = ({backgroundColor, ...props}) => (
 )
 
 
-export default class App extends React.Component {
+export default class App extends Component {
+
+    state = {
+        status: UNDETERMINED
+    }
+
+    componentDidMount() {
+        Permissions.getAsync(Permissions.NOTIFICATIONS)
+            .then(({status}) => {
+                if (status !== GRANTED) {
+                    Permissions.askAsync(Permissions.NOTIFICATIONS)
+                        .then(({status}) => (this.setState(() => ({status}))))
+                        .catch((e) => console.warn('error in asking permission: ', e))
+                }
+        })
+            .catch((e) => (console.warn('error in getting permission: ', e)))
+    }
+
     render() {
         return (
             <Provider store={store}>
