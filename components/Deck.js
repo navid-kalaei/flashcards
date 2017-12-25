@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 import {Text, Button} from 'react-native-elements'
 import {blue, red} from '../utils/colors'
+import {clearLocalNotification, setLocalNotification} from '../utils/helpers'
 
 
 class Deck extends Component {
@@ -28,6 +29,9 @@ class Deck extends Component {
     onStartQuiz = () => {
         const {title} = this.props.navigation.state.params
         const {count} = this.props
+
+        clearLocalNotification()
+            .then(setLocalNotification)
 
         this.props.navigation.navigate(
             'Quiz',
