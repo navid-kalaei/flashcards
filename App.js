@@ -99,6 +99,7 @@ const AppStatusBar = ({backgroundColor, ...props}) => (
 export default class App extends Component {
 
     componentDidMount() {
+        console.log('app did mount')
         setLocalNotification()
     }
 
