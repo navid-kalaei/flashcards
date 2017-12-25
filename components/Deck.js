@@ -44,6 +44,7 @@ class Deck extends Component {
 
     render() {
         const {title, count} = this.props
+
         return (
             <View style={{flex: 1}}>
                 <View style={styles.content}>
@@ -58,6 +59,7 @@ class Deck extends Component {
                         backgroundColor={blue}
                         buttonStyle={styles.button}
                     />
+                    {count !== 0 &&
                     <Button
                         onPress={this.onStartQuiz}
                         large
@@ -65,6 +67,7 @@ class Deck extends Component {
                         backgroundColor={red}
                         buttonStyle={styles.button}
                     />
+                    }
                 </View>
             </View>
         )
