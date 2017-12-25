@@ -45,9 +45,18 @@ class Quiz extends Component {
     render() {
 
         const {count} = this.props.navigation.state.params
-        const {index, showQuestion} = this.state
-        const isDeckFetched = this.state.deck.length
+        const {index, showQuestion, correctCounter} = this.state
 
+        if (index === count) {
+            return(
+                <View style={[styles.container, styles.content]}>
+                    <Text h1 style={styles.text}>Result:</Text>
+                    <Text h4 style={styles.text}>{correctCounter}/{count}</Text>
+                </View>
+            )
+        }
+
+        const isDeckFetched = this.state.deck.length
         const question = isDeckFetched ? this.state.deck[index].question : ''
         const answer = isDeckFetched ? this.state.deck[index].answer : ''
 
