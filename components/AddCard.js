@@ -29,8 +29,6 @@ class AddCard extends Component {
             this.setState(() => ({formError: true}))
         }
         else {
-            console.log('in else')
-
             this.resetState()
 
             const newCard = {
