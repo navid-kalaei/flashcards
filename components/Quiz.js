@@ -10,7 +10,8 @@ class Quiz extends Component {
     state = {
         index: 0,
         deck: [],
-        showQuestion: true
+        showQuestion: true,
+        correctCounter: 0
     }
 
     static navigationOptions = ({navigation}) => {
@@ -31,6 +32,15 @@ class Quiz extends Component {
         const {showQuestion} = this.state
         this.setState(() => ({showQuestion: !showQuestion}))
     }))
+
+    onCorrect = () => {
+        this.setState((state) => ({
+            index: state.index+1,
+            correctCounter: state.correctCounter+1
+        }))
+    }
+
+    onIncorrect = () => (this.setState((state) => ({index: state.index+1})))
 
     render() {
 
@@ -56,12 +66,14 @@ class Quiz extends Component {
                 </View>
                 <View style={styles.buttonSection}>
                     <Button
+                        onPress={this.onCorrect}
                         large
                         title='Correct'
                         backgroundColor={green}
                         buttonStyle={styles.button}
                     />
                     <Button
+                        onPress={this.onIncorrect}
                         large
                         title='Incorrect'
                         backgroundColor={red}
