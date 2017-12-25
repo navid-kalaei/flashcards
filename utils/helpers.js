@@ -1,4 +1,15 @@
-import {DAY, GRANTED, HIGH, NOTIFICATION_BODY, NOTIFICATION_TITLE} from './constants'
+import {AsyncStorage} from 'react-native'
+import {Permissions, Notifications} from 'expo'
+import {
+    DAY,
+    GRANTED,
+    HIGH,
+    FLASHCARDS_NOTIFICATION_KEY,
+    NOTIFICATION_BODY,
+    NOTIFICATION_TITLE,
+    NOTIFICATION_HOUR,
+    NOTIFICATION_MINUTE
+} from './constants'
 
 
 export const decksToArray = (decks) => (
@@ -12,7 +23,7 @@ export const decksToArray = (decks) => (
 )
 
 export const clearLocalNotification = () => (
-    AsyncStorage.removeItem(NOTIFICATION_KEY)
+    AsyncStorage.removeItem(FLASHCARDS_NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync)
 )
 
@@ -31,7 +42,7 @@ export const createNotification = () => ({
 })
 
 export const setLocalNotification = () => (
-    AsyncStorage.getItem(NOTIFICATION_KEY)
+    AsyncStorage.getItem(FLASHCARDS_NOTIFICATION_KEY)
         .then(JSON.parse)
         .then((data) => {
             if (data === null) {
@@ -42,8 +53,8 @@ export const setLocalNotification = () => (
 
                             let tomorrow = new Date()
                             tomorrow.setDate(tomorrow.getDate() + 1)
-                            tomorrow.setHours(20)
-                            tomorrow.setMinutes(0)
+                            tomorrow.setHours(NOTIFICATION_HOUR)
+                            tomorrow.setMinutes(NOTIFICATION_MINUTE)
 
                             Notifications.scheduleLocalNotificationAsync(
                                 createNotification(),
@@ -54,7 +65,7 @@ export const setLocalNotification = () => (
                                 }
                             )
 
-                            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+                            AsyncStorage.setItem(FLASHCARDS_NOTIFICATION_KEY, JSON.stringify(true))
                         }
                     })
             }
