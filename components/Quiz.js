@@ -1,10 +1,16 @@
 import React, {Component} from 'react'
 import {View, StyleSheet, TouchableOpacity} from 'react-native'
 import {Text, Button} from 'react-native-elements'
+import * as api from '../utils/api'
 import {green, red} from '../utils/colors'
 
 
 class Quiz extends Component {
+
+    state = {
+        index: 0,
+        deck: []
+    }
 
     static navigationOptions = ({navigation}) => {
         const {title} = navigation.state.params
@@ -14,18 +20,29 @@ class Quiz extends Component {
         }
     }
 
+    componentDidMount() {
+        const {title} = this.props.navigation.state.params
+
+        api.fetchDeck(title).then(deck => (this.setState(() => ({deck}))))
+    }
+
     render() {
 
         const {count} = this.props.navigation.state.params
+        const {deck, index} = this.state
 
-        return(
+        return (
             <View style={styles.container}>
-                <Text h4>{3}/{count}</Text>
+                <Text h4>{index+1}/{count}</Text>
                 <View style={styles.content}>
-                    <Text h2 style={styles.text}>Is golabi golabi?</Text>
-                    <TouchableOpacity>
-                        <Text style={{color: red}}>Answer</Text>
-                    </TouchableOpacity>
+                    {deck.length
+                    ? <View style={styles.container}>
+                        <Text h2 style={styles.text}>{deck[index].question}</Text>
+                        <TouchableOpacity>
+                            <Text style={{color: red}}>Answer</Text>
+                        </TouchableOpacity>
+                     </View>
+                    : <Text>Loading Questions</Text>}
                 </View>
                 <View style={styles.buttonSection}>
                     <Button
