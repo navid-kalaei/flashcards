@@ -11,7 +11,7 @@ import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
-import {GRANTED, UNDETERMINED} from './utils/constants'
+import {setLocalNotification} from './utils/helpers'
 
 
 const Tabs = TabNavigator(
@@ -98,20 +98,8 @@ const AppStatusBar = ({backgroundColor, ...props}) => (
 
 export default class App extends Component {
 
-    state = {
-        status: UNDETERMINED
-    }
-
     componentDidMount() {
-        Permissions.getAsync(Permissions.NOTIFICATIONS)
-            .then(({status}) => {
-                if (status !== GRANTED) {
-                    Permissions.askAsync(Permissions.NOTIFICATIONS)
-                        .then(({status}) => (this.setState(() => ({status}))))
-                        .catch((e) => console.warn('error in asking permission: ', e))
-                }
-        })
-            .catch((e) => (console.warn('error in getting permission: ', e)))
+        setLocalNotification()
     }
 
     render() {
