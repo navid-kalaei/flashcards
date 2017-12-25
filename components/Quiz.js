@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {View, StyleSheet, TouchableOpacity} from 'react-native'
 import {Text, Button} from 'react-native-elements'
 import * as api from '../utils/api'
-import {green, red} from '../utils/colors'
+import {green, lightPurp, orange, red} from '../utils/colors'
 
 
 class Quiz extends Component {
@@ -35,12 +35,14 @@ class Quiz extends Component {
 
     onCorrect = () => {
         this.setState((state) => ({
-            index: state.index+1,
-            correctCounter: state.correctCounter+1
+            index: state.index + 1,
+            correctCounter: state.correctCounter + 1
         }))
     }
 
-    onIncorrect = () => (this.setState((state) => ({index: state.index+1})))
+    onIncorrect = () => (this.setState((state) => ({index: state.index + 1})))
+
+    onRetake = () => (this.setState(() => ({index: 0, correctCounter: 0, showQuestion: true})))
 
     render() {
 
@@ -48,10 +50,27 @@ class Quiz extends Component {
         const {index, showQuestion, correctCounter} = this.state
 
         if (index === count) {
-            return(
-                <View style={[styles.container, styles.content]}>
-                    <Text h1 style={styles.text}>Result:</Text>
-                    <Text h4 style={styles.text}>{correctCounter}/{count}</Text>
+            return (
+                <View style={styles.container}>
+                    <View style={styles.content}>
+                        <Text h1 style={styles.text}>Result:</Text>
+                        <Text h4 style={styles.text}>{correctCounter}/{count}</Text>
+                    </View>
+                    <View style={styles.buttonSection}>
+                        <Button
+                            large
+                            title='Decks'
+                            backgroundColor={lightPurp}
+                            buttonStyle={styles.button}
+                        />
+                        <Button
+                            onPress={this.onRetake}
+                            large
+                            title='Retake'
+                            backgroundColor={orange}
+                            buttonStyle={styles.button}
+                        />
+                    </View>
                 </View>
             )
         }
@@ -62,16 +81,16 @@ class Quiz extends Component {
 
         return (
             <View style={styles.container}>
-                <Text h4>{index+1}/{count}</Text>
+                <Text h4>{index + 1}/{count}</Text>
                 <View style={styles.content}>
                     {isDeckFetched
-                    ? <View style={styles.content}>
-                        <Text h2 style={styles.text}>{showQuestion ? question : answer}</Text>
-                        <TouchableOpacity onPress={this.togglePage}>
-                            <Text style={{color: red}}>{showQuestion ? 'Answer': 'Question'}</Text>
-                        </TouchableOpacity>
-                     </View>
-                    : <Text>Loading Questions</Text>}
+                        ? <View style={styles.content}>
+                            <Text h2 style={styles.text}>{showQuestion ? question : answer}</Text>
+                            <TouchableOpacity onPress={this.togglePage}>
+                                <Text style={{color: red}}>{showQuestion ? 'Answer' : 'Question'}</Text>
+                            </TouchableOpacity>
+                        </View>
+                        : <Text>Loading Questions</Text>}
                 </View>
                 <View style={styles.buttonSection}>
                     <Button
