@@ -6,10 +6,21 @@ import {green, red} from '../utils/colors'
 
 class Quiz extends Component {
 
+    static navigationOptions = ({navigation}) => {
+        const {title} = navigation.state.params
+
+        return {
+            title
+        }
+    }
+
     render() {
+
+        const {count} = this.props.navigation.state.params
+
         return(
             <View style={styles.container}>
-                <Text h4>{3}/{15}</Text>
+                <Text h4>{3}/{count}</Text>
                 <View style={styles.content}>
                     <Text h2 style={styles.text}>Is golabi golabi?</Text>
                     <TouchableOpacity>

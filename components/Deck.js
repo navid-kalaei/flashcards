@@ -24,6 +24,20 @@ class Deck extends Component {
         )
     }
 
+
+    onStartQuiz = () => {
+        const {title} = this.props.navigation.state.params
+        const {count} = this.props
+
+        this.props.navigation.navigate(
+            'Quiz',
+            {
+                title,
+                count
+            }
+        )
+    }
+
     render() {
         const {title, count} = this.props
         return (
@@ -41,6 +55,7 @@ class Deck extends Component {
                         buttonStyle={styles.button}
                     />
                     <Button
+                        onPress={this.onStartQuiz}
                         large
                         title='Start Quiz'
                         backgroundColor={red}

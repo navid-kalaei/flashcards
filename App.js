@@ -10,6 +10,7 @@ import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 
 
 const Tabs = TabNavigator(
@@ -51,6 +52,7 @@ const Tabs = TabNavigator(
     }
 )
 
+
 const MainNavigator = StackNavigator({
     Home: {
         screen: Tabs
@@ -73,8 +75,18 @@ const MainNavigator = StackNavigator({
                 backgroundColor: purple
             }
         }
+    },
+    Quiz: {
+        screen: Quiz,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple
+            }
+        }
     }
 })
+
 
 const AppStatusBar = ({backgroundColor, ...props}) => (
     <View style={{backgroundColor, height: Constants.statusBarHeight}}>
