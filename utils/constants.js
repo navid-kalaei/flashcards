@@ -1,2 +1,5 @@
 export const NO_INPUT = 'NO_INPUT'
 export const DUPLICATED_INPUT = 'DUPLICATED_INPUT'
+export const GRANTED = 'granted'
+export const DENIED = 'denied'
+export const UNDETERMINED = 'undetermined'
