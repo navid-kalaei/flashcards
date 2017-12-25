@@ -1,8 +1,5 @@
 import {AsyncStorage} from 'react-native'
-
-
-const FLASHCARDS_KEY = 'Flashcards'
-const FLASHCARDS_DECKS_KEY = 'Flashcards:decks'
+import {FLASHCARDS_KEY, FLASHCARDS_DECKS_KEY} from './constants'
 
 export const removeAllDecks = () => (
     AsyncStorage.getAllKeys().then(keys => AsyncStorage.multiRemove(keys))
