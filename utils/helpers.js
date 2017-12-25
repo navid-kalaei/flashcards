@@ -1,3 +1,6 @@
+import {DAY, GRANTED, HIGH, NOTIFICATION_BODY, NOTIFICATION_TITLE} from './constants'
+
+
 export const decksToArray = (decks) => (
     Object.keys(decks).reduce((arrayDeck, title) => {
         arrayDeck.push({
@@ -14,14 +17,14 @@ export const clearLocalNotification = () => (
 )
 
 export const createNotification = () => ({
-    title: 'Take a quiz!',
-    body: 'Don\'t forget to test yourself today!',
+    title: NOTIFICATION_TITLE,
+    body: NOTIFICATION_BODY,
     ios: {
         sound: true
     },
     android: {
         sound: true,
-        priority: 'high',
+        priority: HIGH,
         sticky: false,
         vibrate: true
     }
@@ -34,7 +37,7 @@ export const setLocalNotification = () => (
             if (data === null) {
                 Permissions.askAsync(Permissions.NOTIFICATIONS)
                     .then(({status}) => {
-                        if (status === 'granted') {
+                        if (status === GRANTED) {
                             Notifications.cancelAllScheduledNotificationsAsync()
 
                             let tomorrow = new Date()
@@ -46,7 +49,7 @@ export const setLocalNotification = () => (
                                 createNotification(),
                                 {
                                     time: tomorrow,
-                                    repeat: 'day'
+                                    repeat: DAY
 
                                 }
                             )
