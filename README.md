@@ -222,4 +222,4 @@ If this causes problems for you, you may want to try changing your terminal's co
 
 ### Test
 
-It is fully tested on Huawei Nova 2 Plus with Android of 7.0
+It is fully tested on Huawei Nova 2 Plus with Android of 7.0 and Iphone 5s with IOS 11
