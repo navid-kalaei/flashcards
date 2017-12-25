@@ -46,7 +46,7 @@ class Quiz extends Component {
                 <Text h4>{index+1}/{count}</Text>
                 <View style={styles.content}>
                     {isDeckFetched
-                    ? <View style={styles.container}>
+                    ? <View style={styles.content}>
                         <Text h2 style={styles.text}>{showQuestion ? question : answer}</Text>
                         <TouchableOpacity>
                             <Text style={{color: red}}>Answer</Text>
