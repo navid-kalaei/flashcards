@@ -48,8 +48,8 @@ class Quiz extends Component {
                     {isDeckFetched
                     ? <View style={styles.content}>
                         <Text h2 style={styles.text}>{showQuestion ? question : answer}</Text>
-                        <TouchableOpacity>
-                            <Text style={{color: red}}>Answer</Text>
+                        <TouchableOpacity onPress={this.togglePage}>
+                            <Text style={{color: red}}>{showQuestion ? 'Answer': 'Question'}</Text>
                         </TouchableOpacity>
                      </View>
                     : <Text>Loading Questions</Text>}
