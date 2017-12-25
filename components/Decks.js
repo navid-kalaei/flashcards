@@ -26,6 +26,7 @@ class Decks extends Component {
             }
         ))}>
             <Card title={item.title}>
+                {/*{console.log(item, item)}*/}
                 <Text style={{textAlign: 'center'}}>{item.count} Cards</Text>
             </Card>
         </TouchableOpacity>
