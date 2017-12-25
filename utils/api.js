@@ -20,7 +20,7 @@ export const fetchDecks = () => (
 )
 
 export const fetchDeck = (title) => (
-    AsyncStorage.getItem(`${FLASHCARDS_KEY}:${title}`)
+    AsyncStorage.getItem(`${FLASHCARDS_KEY}:${title}`).then(JSON.parse)
 )
 
 export const addCard = ({deck, question, answer}) => (
