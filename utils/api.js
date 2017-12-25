@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native'
 import {FLASHCARDS_KEY, FLASHCARDS_DECKS_KEY} from './constants'
 
-export const removeAllDecks = () => (
+export const cleanupDb = () => (
     AsyncStorage.getAllKeys().then(keys => AsyncStorage.multiRemove(keys))
 )
 
