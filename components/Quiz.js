@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {View, StyleSheet, TouchableOpacity} from 'react-native'
-import {NavigationActions} from 'react-navigation'
 import {Text, Button} from 'react-native-elements'
+import Result from './Result'
 import * as api from '../utils/api'
 import {green, lightPurp, orange, red} from '../utils/colors'
 
@@ -45,15 +45,6 @@ class Quiz extends Component {
 
     onRetake = () => (this.setState(() => ({index: 0, correctCounter: 0, showQuestion: true})))
 
-    toHome = () => {
-        this.props.navigation.dispatch(NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({ routeName: 'Home'})
-            ]
-        }))
-    }
-
     render() {
 
         const {count} = this.props.navigation.state.params
@@ -61,28 +52,7 @@ class Quiz extends Component {
 
         if (index === count) {
             return (
-                <View style={styles.container}>
-                    <View style={styles.content}>
-                        <Text h1 style={styles.text}>Result:</Text>
-                        <Text h4 style={styles.text}>{correctCounter}/{count}</Text>
-                    </View>
-                    <View style={styles.buttonSection}>
-                        <Button
-                            onPress={this.toHome}
-                            large
-                            title='Decks'
-                            backgroundColor={lightPurp}
-                            buttonStyle={styles.button}
-                        />
-                        <Button
-                            onPress={this.onRetake}
-                            large
-                            title='Retake'
-                            backgroundColor={orange}
-                            buttonStyle={styles.button}
-                        />
-                    </View>
-                </View>
+                <Result onRetake={this.onRetake} count={count} correctCounter={correctCounter}/>
             )
         }
 
