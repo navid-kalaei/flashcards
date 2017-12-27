@@ -6,15 +6,12 @@ import {addDeck} from '../actions/decks'
 import * as api from '../utils/api'
 import {NO_INPUT, DUPLICATED_INPUT} from '../utils/constants'
 
+
 class AddDeck extends Component {
 
     state = {
         formError: '',
         title: ''
-    }
-
-    toHome = () => {
-        this.props.navigation.goBack('AddDeck')
     }
 
     handleChange = (title) => (this.setState(() => ({title})))
@@ -38,9 +35,17 @@ class AddDeck extends Component {
         const {addDeck} = this.props
 
         if (this.validateForm(title)) {
-            api.addDeck(title).then(addDeck(title))
+            const {navigate} = this.props.navigation
+
+            api.addDeck(title).then(addDeck(title)).then(
+                navigate(
+                    'Deck',
+                    {
+                        title,
+                        count: 0
+                    }))
+
             this.setState(() => ({title: ''}))
-            this.toHome()
         }
 
     }
