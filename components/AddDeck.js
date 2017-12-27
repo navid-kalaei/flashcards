@@ -72,9 +72,7 @@ class AddDeck extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    decks: state.decks
-})
+const mapStateToProps = ({decks}) => ({decks})
 
 
 export default connect(mapStateToProps)(AddDeck)
