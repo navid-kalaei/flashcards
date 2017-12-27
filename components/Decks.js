@@ -10,10 +10,10 @@ import {decksToArray} from '../utils/helpers'
 class Decks extends Component {
 
     componentDidMount() {
-        const {dispatch} = this.props
+        const {fetchDecks} = this.props
         api.fetchDecks().then(decks => {
             decks = decks || {}
-            dispatch(fetchDecks(decks))
+            fetchDecks(decks)
         })
     }
 
@@ -51,4 +51,4 @@ class Decks extends Component {
 const mapStateToProps = ({decks}) => ({decks})
 
 
-export default connect(mapStateToProps)(Decks)
+export default connect(mapStateToProps, {fetchDecks})(Decks)
