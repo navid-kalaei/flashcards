@@ -45,6 +45,8 @@ class Quiz extends Component {
 
     onRetake = () => (this.setState(() => ({index: 0, correctCounter: 0, showQuestion: true})))
 
+    onGoBack = () => (this.props.navigation.goBack())
+
     render() {
 
         const {count} = this.props.navigation.state.params
@@ -52,7 +54,7 @@ class Quiz extends Component {
 
         if (index === count) {
             return (
-                <Result onRetake={this.onRetake} count={count} correctCounter={correctCounter}/>
+                <Result onRetake={this.onRetake} onGoBack={this.onGoBack} count={count} correctCounter={correctCounter}/>
             )
         }
 

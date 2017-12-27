@@ -1,13 +1,12 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {View, StyleSheet} from 'react-native'
 import {Text, Button} from 'react-native-elements'
 import {lightPurp, orange} from '../utils/colors'
 
 
 const Result = (props) => {
 
-    const goBack = () => (props.navigation.goBack('Quiz'))
-    const {correctCounter, count, onRetake} = props
+    const {correctCounter, count, onRetake, onGoBack} = props
 
     return (
         <View style={styles.container}>
@@ -24,7 +23,7 @@ const Result = (props) => {
                     buttonStyle={styles.button}
                 />
                 <Button
-                    onPress={goBack}
+                    onPress={onGoBack}
                     large
                     title='Go Back'
                     backgroundColor={orange}
