@@ -3,7 +3,7 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native'
 import {Text, Button} from 'react-native-elements'
 import Result from './Result'
 import * as api from '../utils/api'
-import {green, lightPurp, orange, red} from '../utils/colors'
+import {green, red} from '../utils/colors'
 
 
 class Quiz extends Component {
@@ -23,10 +23,9 @@ class Quiz extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount () {
         const {title} = this.props.navigation.state.params
-
-        api.fetchDeck(title).then(deck => (this.setState(() => ({deck}))))
+        await api.fetchDeck(title).then(deck => this.setState({deck}))
     }
 
     togglePage = () => {
