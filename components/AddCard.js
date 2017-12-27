@@ -27,6 +27,7 @@ class AddCard extends Component {
     onSubmit = () => {
         const {question, answer} = this.state
         const {deck} = this.props.navigation.state.params
+        const {incrementDeckCount} = this.props
         if (!question || !answer) {
             this.setState(() => ({formError: true}))
         }
@@ -39,7 +40,7 @@ class AddCard extends Component {
                 answer
             }
 
-            api.addCard(newCard).then(this.props.dispatch(incrementDeckCount(deck)))
+            api.addCard(newCard).then(incrementDeckCount(deck))
 
             this.props.navigation.goBack()
         }
@@ -74,5 +75,4 @@ class AddCard extends Component {
 }
 
 
-// just to use dispatch
-export default connect(null)(AddCard)
+export default connect(null, {incrementDeckCount})(AddCard)
