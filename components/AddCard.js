@@ -8,17 +8,19 @@ import {incrementDeckCount} from '../actions/decks'
 
 class AddCard extends Component {
 
-    state = {
+    initialState = {
         formError: false,
         question: '',
         answer: ''
     }
 
-    resetState = () => (this.setState({
-        formError: false,
-        question: '',
-        answer: ''
-    }))
+    state = {
+        ...this.initialState
+    }
+
+    resetState = () => {
+        this.setState({...this.initialState})
+    }
 
     handleChange = (field) => (input) => (this.setState(() => ({[field]: input})))
 
