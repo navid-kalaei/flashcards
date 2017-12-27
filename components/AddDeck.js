@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View} from 'react-native'
+import {StyleSheet, View} from 'react-native'
 import {FormInput, FormLabel, FormValidationMessage, Button} from 'react-native-elements'
 import {connect} from 'react-redux'
 import {addDeck} from '../actions/decks'
@@ -49,28 +49,45 @@ class AddDeck extends Component {
         const {title, formError} = this.state
 
         return (
-            <View style={{flex: 1}}>
-                <View style={{flex: 1}}>
-                    <FormLabel labelStyle={{fontSize: 17}}>What is the title of your new deck?</FormLabel>
+            <View style={styles.container}>
+                <View style={styles.container}>
+                    <FormLabel labelStyle={styles.label}>What is the title of your new deck?</FormLabel>
                     <FormInput value={title} onChangeText={this.handleChange} maxLength={25}/>
 
                     {formError === NO_INPUT &&
-                    <FormValidationMessage style={{textAlign: 'center'}}>
+                    <FormValidationMessage style={styles.message}>
                         Title Cannot Be Empty
                     </FormValidationMessage>}
 
                     {formError === DUPLICATED_INPUT &&
-                    <FormValidationMessage style={{textAlign: 'center'}}>
+                    <FormValidationMessage style={styles.message}>
                         Title already exists.
                     </FormValidationMessage>}
                 </View>
-                <View style={{marginBottom: 24}}>
+                <View style={styles.buttonSection}>
                     <Button onPress={this.onSubmit} large title="Add Deck"/>
                 </View>
             </View>
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    label: {
+        fontSize: 17
+    },
+    message: {
+        textAlign: 'center'
+    },
+    buttonSection: {
+        marginBottom: 24
+    }
+})
+
 
 const mapStateToProps = ({decks}) => ({decks})
 
