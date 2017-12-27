@@ -55,6 +55,7 @@ Not familiar with yarn? [Check this out](https://yarnpkg.com/en/)
 * node: v9.3.0
 * yarn: 1.3.2
 * Hoawei Nova 2: Android 7
+* IPhone 5s: IOS 11
 * Expo: 2.2.0
 
 ## Licence:
