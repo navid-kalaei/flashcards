@@ -29,10 +29,10 @@ class Quiz extends Component {
         api.fetchDeck(title).then(deck => (this.setState(() => ({deck}))))
     }
 
-    togglePage = () => (this.setState(() => {
+    togglePage = () => {
         const {showQuestion} = this.state
-        this.setState(() => ({showQuestion: !showQuestion}))
-    }))
+        this.setState({showQuestion: !showQuestion})
+    }
 
     onCorrect = () => {
         this.setState((state) => ({
