@@ -34,11 +34,11 @@ class AddDeck extends Component {
     }
 
     onSubmit = () => {
-        const {dispatch} = this.props
         const {title} = this.state
+        const {addDeck} = this.props
 
         if (this.validateForm(title)) {
-            api.addDeck(title).then(() => dispatch(addDeck(title)))
+            api.addDeck(title).then(addDeck(title))
             this.setState(() => ({title: ''}))
             this.toHome()
         }
@@ -75,4 +75,4 @@ class AddDeck extends Component {
 const mapStateToProps = ({decks}) => ({decks})
 
 
-export default connect(mapStateToProps)(AddDeck)
+export default connect(mapStateToProps, {addDeck})(AddDeck)
