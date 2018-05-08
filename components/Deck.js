@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {View, StyleSheet} from 'react-native'
+import {View, StyleSheet, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
-import {Text, Button} from 'react-native-elements'
-import {blue, red} from '../utils/colors'
+import {Text, Button, FormInput} from 'react-native-elements'
+import {blue, green, red} from '../utils/colors'
 import {clearLocalNotification, setLocalNotification} from '../utils/helpers'
 
 
@@ -16,8 +16,13 @@ class Deck extends Component {
         }
     }
 
+    state = {
+        title: this.props.title,
+        is_title_editable: false
+    }
+
     onAddCard = () => {
-        const {title} = this.props.navigation.state.params
+        const {title} = this.state
 
         this.props.navigation.navigate(
             'AddCard',
@@ -27,7 +32,7 @@ class Deck extends Component {
 
 
     onStartQuiz = () => {
-        const {title} = this.props.navigation.state.params
+        const {title} = this.state
         const {count} = this.props
 
         clearLocalNotification()
@@ -42,31 +47,68 @@ class Deck extends Component {
         )
     }
 
+    onEditTitle = (input) => (this.setState({title: input}))
+
+    onAcceptNewTitle = () => (this.setState({is_title_editable: false}))
+
+    onRejectNewTitle = () => (this.setState({
+        title: this.props.title,
+        is_title_editable: false
+    }))
+
     render() {
-        const {title, count} = this.props
+        const {title} = this.state
+        const {count} = this.props
 
         return (
             <View style={{flex: 1}}>
                 <View style={styles.content}>
-                    <Text h1 style={styles.text}>{title}</Text>
+                    <TouchableOpacity onPress={() => (this.setState({is_title_editable: !this.state.is_title_editable}))}>
+                        {/*todo: check the new name is not duplicated*/}
+                        { !this.state.is_title_editable ?
+                            <Text h1 style={styles.text}>{title}</Text> :
+                            <FormInput value={title} onChangeText={this.onEditTitle}/>
+                        }
+                    </TouchableOpacity>
                     <Text h4 style={styles.text}>{count} cards</Text>
                 </View>
                 <View style={styles.buttonSection}>
-                    <Button
-                        onPress={this.onAddCard}
-                        large
-                        title='Add Card'
-                        backgroundColor={blue}
-                        buttonStyle={styles.button}
-                    />
-                    {count !== 0 &&
-                    <Button
-                        onPress={this.onStartQuiz}
-                        large
-                        title='Start Quiz'
-                        backgroundColor={red}
-                        buttonStyle={styles.button}
-                    />
+                    {
+                        !this.state.is_title_editable ?
+                        <View>
+                            <Button
+                                onPress={this.onAddCard}
+                                large
+                                title='Add Card'
+                                backgroundColor={blue}
+                                buttonStyle={styles.button}
+                            />
+                            {count !== 0 &&
+                            <Button
+                                onPress={this.onStartQuiz}
+                                large
+                                title='Start Quiz'
+                                backgroundColor={red}
+                                buttonStyle={styles.button}
+                            />
+                            }
+                        </View> :
+                        <View>
+                            <Button
+                                onPress={this.onAcceptNewTitle}
+                                large
+                                title='Done'
+                                backgroundColor={green}
+                                buttonStyle={styles.button}
+                            />
+                            <Button
+                                onPress={this.onRejectNewTitle}
+                                large
+                                title='Cancel'
+                                backgroundColor={red}
+                                buttonStyle={styles.button}
+                            />
+                        </View>
                     }
                 </View>
             </View>
