@@ -18,7 +18,8 @@ class Deck extends Component {
 
     state = {
         title: this.props.title,
-        is_title_editable: false
+        isTitleEditable: false,
+        error: ''
     }
 
     onAddCard = () => {
@@ -49,11 +50,11 @@ class Deck extends Component {
 
     onEditTitle = (input) => (this.setState({title: input}))
 
-    onAcceptNewTitle = () => (this.setState({is_title_editable: false}))
+    onAcceptNewTitle = () => (this.setState({isTitleEditable: false}))
 
     onRejectNewTitle = () => (this.setState({
         title: this.props.title,
-        is_title_editable: false
+        isTitleEditable: false
     }))
 
     render() {
@@ -63,9 +64,9 @@ class Deck extends Component {
         return (
             <View style={{flex: 1}}>
                 <View style={styles.content}>
-                    <TouchableOpacity onPress={() => (this.setState({is_title_editable: !this.state.is_title_editable}))}>
+                    <TouchableOpacity onPress={() => (this.setState({isTitleEditable: !this.state.isTitleEditable}))}>
                         {/*todo: check the new name is not duplicated*/}
-                        { !this.state.is_title_editable ?
+                        { !this.state.isTitleEditable ?
                             <Text h1 style={styles.text}>{title}</Text> :
                             <FormInput value={title} onChangeText={this.onEditTitle}/>
                         }
@@ -74,7 +75,7 @@ class Deck extends Component {
                 </View>
                 <View style={styles.buttonSection}>
                     {
-                        !this.state.is_title_editable ?
+                        !this.state.isTitleEditable ?
                         <View>
                             <Button
                                 onPress={this.onAddCard}
